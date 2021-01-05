@@ -11,7 +11,7 @@ namespace MVC_Exercises.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<HomeController> _logger;        
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -20,6 +20,11 @@ namespace MVC_Exercises.Controllers
 
         public IActionResult Index()
         {
+            ExercisesModel showFooter = new ExercisesModel
+            {
+                AuthorName = "Nicolas Lewentorp",
+                DateNow = DateTime.Now
+            };
             return View();
         }
 
@@ -27,10 +32,20 @@ namespace MVC_Exercises.Controllers
         {
             return View();
         }
+
         public IActionResult Projects()
         {
             return View();
         }
+
+        public IActionResult GuessingGame()
+        {
+            return View();
+        }
+
+
+
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
