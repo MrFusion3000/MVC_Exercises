@@ -1,0 +1,19 @@
+﻿@model FeverCheckModel
+
+@{
+    ViewData["Title"] = "FeverCheck";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form action="FeverCheck" method="post">
+    <p><input type="number" name="_bodyTemp" value="37" /></p>
+    <p><input type="submit" name="submit" value="Send" /></p>
+</form>
+
+@if(Model != null)
+{
+    <p>@Model.BodyTemp</p>
+
+}

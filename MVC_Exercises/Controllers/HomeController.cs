@@ -19,12 +19,7 @@ namespace MVC_Exercises.Controllers
         }
 
         public IActionResult Index()
-        {
-            ExercisesModel showFooter = new ExercisesModel
-            {
-                AuthorName = "Nicolas Lewentorp",
-                DateNow = DateTime.Now
-            };
+        {          
             return View();
         }
 
@@ -36,6 +31,20 @@ namespace MVC_Exercises.Controllers
         public IActionResult Projects()
         {
             return View();
+        }
+
+        public IActionResult FeverCheck()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult FeverCheck(int _bodyTemp)
+        {
+            FeverCheckModel fever = new FeverCheckModel();
+            fever.BodyTemp = _bodyTemp;
+
+            return View(fever);
         }
 
         public IActionResult GuessingGame()
