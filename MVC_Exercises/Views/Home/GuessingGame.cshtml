@@ -1,0 +1,23 @@
+﻿@model GuessingGameModel
+
+@{
+    ViewData["Title"] = "GuessingGame";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>Enter a number between 1 and 10 to guess the hidden number!</p>
+
+<form action="GuessingGame" method="post">
+    <p><input type="number" name="_GuessedNumber" value="0" /></p>
+    <p><input type="submit" name="submit" value="Send" /></p>
+</form>
+
+@if (Model != null)
+{
+    <p>@GuessingGameModel.RndNumber</p>
+    <p>@GuessingGameModel.GuessedNumber</p>
+    <p>@GuessingGameModel.Message</p>
+
+}

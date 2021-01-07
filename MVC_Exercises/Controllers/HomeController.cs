@@ -45,8 +45,6 @@ namespace MVC_Exercises.Controllers
             FeverCheckModel.BodyTemp = _bodyTemp;
             FeverCheckModel.Message = _message;
 
-            //ShowMessageModel.FeverCheckMethod(_bodyTemp);
-
             FeverCheckModel.FeverCheckMethod(_bodyTemp);
 
             return View(fever);
@@ -57,6 +55,18 @@ namespace MVC_Exercises.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult GuessingGame(int _guessedNumber, string _message, int _rndNumber)
+        {
+            GuessingGameModel guessingGame = new GuessingGameModel();
+            GuessingGameModel.GuessedNumber = _guessedNumber;
+            GuessingGameModel.Message = _message;
+            GuessingGameModel.RndNumber = _rndNumber;
+
+            GuessingGameModel.GuessingGameMethod(_guessedNumber);
+
+            return View(guessingGame);
+        }
 
 
 

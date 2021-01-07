@@ -23,6 +23,15 @@ namespace MVC_Exercises
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
             services.AddControllersWithViews();
         }
 
@@ -46,16 +55,21 @@ namespace MVC_Exercises
 
             app.UseAuthorization();
 
+            app.UseSession();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
-                    name: "FeverCheck",
+                    name: "fevercheck",
                     pattern: "/fevercheck",
-                    defaults: new { controller = "Home", action = "FeverCheck" }
-                    );
+                    defaults: new { controller = "Home", action = "FeverCheck" });
+                endpoints.MapControllerRoute(
+                    name: "GuessingGame",
+                    pattern: "/GuessingGame",
+                    defaults: new { controller = "Home", action = "GuessingGame" });
             });            
         }
     }
