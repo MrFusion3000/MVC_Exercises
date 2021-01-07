@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MVC_Exercises.Models
 {
-    public class FeverCheckModel
+    public static class ShowMessageModel
     {
         public static int BodyTemp { get; set; }
         public static string Message { get; set; }
@@ -18,7 +18,7 @@ namespace MVC_Exercises.Models
             {
                 Message = "You have Hypothermia!";
             }
-            else if(BodyTemp > 40)
+            else if (BodyTemp > 40)
             {
                 Message = "Dude, You have Hyperthermia!";
             }

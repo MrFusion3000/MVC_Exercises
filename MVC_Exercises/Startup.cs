@@ -51,7 +51,12 @@ namespace MVC_Exercises
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-            });
+                endpoints.MapControllerRoute(
+                    name: "FeverCheck",
+                    pattern: "/fevercheck",
+                    defaults: new { controller = "Home", action = "FeverCheck" }
+                    );
+            });            
         }
     }
 }

@@ -11,12 +11,12 @@ namespace MVC_Exercises.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;        
+        //private readonly ILogger<HomeController> _logger;        
 
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
+        //public HomeController(ILogger<HomeController> logger)
+        //{
+        //    _logger = logger;
+        //}
 
         public IActionResult Index()
         {          
@@ -39,10 +39,15 @@ namespace MVC_Exercises.Controllers
         }
 
         [HttpPost]
-        public IActionResult FeverCheck(int _bodyTemp)
+        public IActionResult FeverCheck(int _bodyTemp, string _message)
         {
             FeverCheckModel fever = new FeverCheckModel();
-            fever.BodyTemp = _bodyTemp;
+            FeverCheckModel.BodyTemp = _bodyTemp;
+            FeverCheckModel.Message = _message;
+
+            //ShowMessageModel.FeverCheckMethod(_bodyTemp);
+
+            FeverCheckModel.FeverCheckMethod(_bodyTemp);
 
             return View(fever);
         }
