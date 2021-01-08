@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,38 +11,50 @@ namespace MVC_Exercises.Models
         public static int GuessedNumber { get; set; }
         public static string Message { get; set; }
         public static int RndNumber { get; set; }
+        public static bool Win { get; set; }
 
-        public static Random redRum = new Random();
-        //RndNumber = redRum.Next(1, 10);
+        public static List<int> Guesses = new List<int>();
+        //public static string SessionInfo_CurrentTime { get; private set; }
+        //public string SessionInfo_SessionTime { get; private set; }
+        
 
-        public static void GuessingGameMethod(int _guessedNumber)
+        public static int AmountOfTries = 1;
+
+        public static void GuessingGameMethod()
         {
-            int AmountOfTries = 1;
-            //Random redRum = new Random();
-            RndNumber = redRum.Next(1, 10);
-            GuessedNumber= _guessedNumber;
+            Guesses.Add(GuessedNumber);
             Message = " ";
 
-            if (GuessedNumber < RndNumber)
+            if (GuessedNumber < 1 || GuessedNumber > 100)
+            {
+                Message = "Your number is not in the range 1-100";
+                //AmountOfTries++;
+            }
+            else if (GuessedNumber < RndNumber)
             {
                 Message = "Eeek, no can do! För lågt!";  
-                AmountOfTries++;
+                AmountOfTries++;                
             }
             else if (GuessedNumber > RndNumber)
             {
                 Message = "Yikes! För högt!";
                 AmountOfTries++;
-            }
- 
-            if (GuessedNumber == RndNumber)
+            } 
+            else //if (GuessedNumber == RndNumber)
             {
                 Message = "Snyggt! Det tog dig " + AmountOfTries + " försök att hitta rätt.";
-            }
+                // funktion med knapp för att ladda om sidan
+                AmountOfTries = 1;
+                Win = true;
+            }            
+        }
 
-            if (GuessedNumber < 1 || GuessedNumber > 10)
-            {
-                Message = " Your number is not in the range 1-10";
-            }
+        public static int RndNumb()
+        {            
+            Random redRum = new Random();
+            RndNumber = redRum.Next(1, 100);
+            
+            return RndNumber;
         }
     }
 }

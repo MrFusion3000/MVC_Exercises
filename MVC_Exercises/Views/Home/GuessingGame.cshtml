@@ -21,3 +21,12 @@
     <p>@GuessingGameModel.Message</p>
 
 }
+
+@if (GuessingGameModel.Win == true)
+{
+    <form action="NewGame" method="post">
+    <p><input type="submit" name="NewGame" value="New Game" />
+        
+       <input type="button" value="New Game" onclick="location.href='@Url.Action("GuessingGame")'" /></p>
+    </form>
+}

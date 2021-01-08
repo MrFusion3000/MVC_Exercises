@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MVC_Exercises.Models;
 using System;
@@ -17,6 +18,8 @@ namespace MVC_Exercises.Controllers
         //{
         //    _logger = logger;
         //}
+
+        string Key = "SessionRndNumber";
 
         public IActionResult Index()
         {          
@@ -50,20 +53,32 @@ namespace MVC_Exercises.Controllers
             return View(fever);
         }
 
+        [HttpGet]
         public IActionResult GuessingGame()
         {
+            GuessingGameModel.Win = false;
+            int _rndNumber = GuessingGameModel.RndNumb();
+            HttpContext.Session.SetInt32(Key, _rndNumber);
             return View();
         }
 
         [HttpPost]
-        public IActionResult GuessingGame(int _guessedNumber, string _message, int _rndNumber)
+        public IActionResult GuessingGame(int _guessedNumber)
         {
             GuessingGameModel guessingGame = new GuessingGameModel();
             GuessingGameModel.GuessedNumber = _guessedNumber;
-            GuessingGameModel.Message = _message;
-            GuessingGameModel.RndNumber = _rndNumber;
+            GuessingGameModel.Message = "";
 
-            GuessingGameModel.GuessingGameMethod(_guessedNumber);
+            GuessingGameModel.RndNumber = (int)HttpContext.Session.GetInt32(Key);
+
+            GuessingGameModel.GuessingGameMethod();
+
+            //const string SessionKeyTime = "_Time";
+            //// Requires SessionExtensions from sample download.
+            //if (HttpContext.Session.Get<DateTime>(SessionKeyTime) == default)
+            //{
+            //    HttpContext.Session.Set<DateTime>(SessionKeyTime, currentTime);
+            //}
 
             return View(guessingGame);
         }
