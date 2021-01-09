@@ -26,8 +26,6 @@
 {
     <form action="NewGame" method="post">
         <p>
-            <input type="submit" name="NewGame" value="New Game" />
-
             <input type="button" value="New Game" onclick="location.href='@Url.Action("GuessingGame")'" />
         </p>
     </form>
@@ -37,9 +35,12 @@
     {
         <p>@item</p>
     }
-    @foreach (var item in showGuesses)
+
+    @*<p>List of Guesses in Session state:</p>
+    @foreach (var item in GuessingGameModel.ShowGuesses)
     {
         <p>@item</p>
-    }
+    }*@
 
+}
 

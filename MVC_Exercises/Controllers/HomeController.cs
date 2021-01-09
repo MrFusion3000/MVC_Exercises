@@ -22,7 +22,6 @@ namespace MVC_Exercises.Controllers
         string Key = "SessionRndNumber";
         private string GuessList;
 
-        public byte[] showGuesses { get; private set; }
 
         public IActionResult Index()
         {          
@@ -76,13 +75,12 @@ namespace MVC_Exercises.Controllers
             GuessingGameModel.Message = "";
 
             //Set Session var as list Guesses
-            HttpContext.Session.Set(GuessList, GuessingGameModel.Guesses);
+            HttpContext.Session.Set("GuessList", GuessingGameModel.Guesses );
 
             //Set var RndNumber to saved session value
             GuessingGameModel.RndNumber = (int)HttpContext.Session.GetInt32(Key);
 
-
-            showGuesses = HttpContext.Session.Get(GuessList);
+            //GuessingGameModel.ShowGuesses = HttpContext.Session.Get(GuessList);
 
             GuessingGameModel.GuessingGameMethod();
 

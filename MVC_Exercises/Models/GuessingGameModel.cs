@@ -13,6 +13,7 @@ namespace MVC_Exercises.Models
         public static string Message { get; set; }
         public static int RndNumber { get; set; }
         public static bool Win { get; set; }
+        //public static byte[] ShowGuesses { get; set; }
 
         public static List<int> Guesses { get; set; } = new List<int>();
 
