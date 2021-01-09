@@ -20,6 +20,9 @@ namespace MVC_Exercises.Controllers
         //}
 
         string Key = "SessionRndNumber";
+        private string GuessList;
+
+        public byte[] showGuesses { get; private set; }
 
         public IActionResult Index()
         {          
@@ -57,8 +60,11 @@ namespace MVC_Exercises.Controllers
         public IActionResult GuessingGame()
         {
             GuessingGameModel.Win = false;
-            int _rndNumber = GuessingGameModel.RndNumb();
+            var _rndNumber = GuessingGameModel.RndNumb();
+            //var _guesses = GuessingGameModel.Guesses;
             HttpContext.Session.SetInt32(Key, _rndNumber);
+            GuessingGameModel.Guesses.Clear();
+
             return View();
         }
 
@@ -69,16 +75,16 @@ namespace MVC_Exercises.Controllers
             GuessingGameModel.GuessedNumber = _guessedNumber;
             GuessingGameModel.Message = "";
 
+            //Set Session var as list Guesses
+            HttpContext.Session.Set(GuessList, GuessingGameModel.Guesses);
+
+            //Set var RndNumber to saved session value
             GuessingGameModel.RndNumber = (int)HttpContext.Session.GetInt32(Key);
 
-            GuessingGameModel.GuessingGameMethod();
 
-            //const string SessionKeyTime = "_Time";
-            //// Requires SessionExtensions from sample download.
-            //if (HttpContext.Session.Get<DateTime>(SessionKeyTime) == default)
-            //{
-            //    HttpContext.Session.Set<DateTime>(SessionKeyTime, currentTime);
-            //}
+            showGuesses = HttpContext.Session.Get(GuessList);
+
+            GuessingGameModel.GuessingGameMethod();
 
             return View(guessingGame);
         }
