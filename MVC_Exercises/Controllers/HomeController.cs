@@ -19,8 +19,8 @@ namespace MVC_Exercises.Controllers
         //    _logger = logger;
         //}
 
-        string Key = "SessionRndNumber";
-        private string GuessList;
+        private readonly string Key = "SessionRndNumber";
+        private readonly string GuessList = "SessionGuessesList";
 
 
         public IActionResult Index()
@@ -59,9 +59,10 @@ namespace MVC_Exercises.Controllers
         public IActionResult GuessingGame()
         {
             GuessingGameModel.Win = false;
-            var _rndNumber = GuessingGameModel.RndNumb();
+            GuessingGameModel.Guesses.Clear();
+            //var _rndNumber = GuessingGameModel.RndNumb();
             //var _guesses = GuessingGameModel.Guesses;
-            HttpContext.Session.SetInt32(Key, _rndNumber);
+            HttpContext.Session.SetInt32(Key, GuessingGameModel.RndNumb());
             GuessingGameModel.Guesses.Clear();
 
             return View();
@@ -72,23 +73,22 @@ namespace MVC_Exercises.Controllers
         {
             GuessingGameModel guessingGame = new GuessingGameModel();
             GuessingGameModel.GuessedNumber = _guessedNumber;
-            GuessingGameModel.Message = "";
+            GuessingGameModel.Message = "";            
 
-            //Set Session var as list Guesses
-            HttpContext.Session.Set("GuessList", GuessingGameModel.Guesses );
+            //Get SessionRndNumber and Set property RndNumber
+            GuessingGameModel.RndNumber = (int)HttpContext.Session.GetInt32(Key);            
 
-            //Set var RndNumber to saved session value
-            GuessingGameModel.RndNumber = (int)HttpContext.Session.GetInt32(Key);
-
-            //GuessingGameModel.ShowGuesses = HttpContext.Session.Get(GuessList);
-
+            //Run Guessing Check
             GuessingGameModel.GuessingGameMethod();
+
+            //Set Session variable GuessList to save List Guesses
+            HttpContext.Session.Set(GuessList, GuessingGameModel.Guesses);
+
+            //Get Session varible GuessList
+            GuessingGameModel.ShowGuesses = HttpContext.Session.Get<List<int>>(GuessList);
 
             return View(guessingGame);
         }
-
-
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

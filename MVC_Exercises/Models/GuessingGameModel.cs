@@ -13,15 +13,12 @@ namespace MVC_Exercises.Models
         public static string Message { get; set; }
         public static int RndNumber { get; set; }
         public static bool Win { get; set; }
-        //public static byte[] ShowGuesses { get; set; }
+        public static List<int> ShowGuesses { get; set; }
 
         public static List<int> Guesses { get; set; } = new List<int>();
 
         //public static List<int> Guesses = new List<int>();
         
-            
-            //public static string SessionInfo_CurrentTime { get; private set; }
-        //public string SessionInfo_SessionTime { get; private set; }
         
         //***Spara list items i Session values
 
