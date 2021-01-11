@@ -7,26 +7,33 @@ using System.Threading.Tasks;
 
 namespace MVC_Exercises.Controllers
 {
-    public class PeopleController : Controller
+    public class People
     {
-        public IActionResult DisplayPeopleDetails()
-        {
-            List<PeopleModel> listCustomer = new List<PeopleModel>();
-            PeopleModel people = new PeopleModel();
+        //public static void PeopleList()
+        //{
+        //    List<PeopleModel> listPeople = new List<PeopleModel>();
+        //    PeopleModel people = new PeopleModel();
 
-            people.Name = "Sverre Bumpa Jr";
-            people.Phone = 087565133;
-            people.City = "Stockholm";
-            listCustomer.Add(people);
+        //    people.Id = 1;
+        //    people.Name = "Sverre Bumpa Jr";
+        //    people.Phone = 087565133;
+        //    people.City = "Stockholm";
+        //    listPeople.Add(people);
 
-            people = new PeopleModel();
-            people.Name = "Alf-Alfa Betasson";
-            people.Phone = 0760100200;
-            people.City = "Örebro";
-            listCustomer.Add(people);
+        //    people = new PeopleModel();
+        //    people.Id = 2;
+        //    people.Name = "Alf-Alfa Betasson";
+        //    people.Phone = 0760100200;
+        //    people.City = "Örebro";
+        //    listPeople.Add(people);
 
+        //    people = new PeopleModel();
+        //    people.Name = "Förste Walter";
+        //    people.Phone = 08212325;
+        //    people.City = "Reykjavik";
+        //    listPeople.Add(people);
 
-            return View(listCustomer);
-        }
+        //    //return listPeople;
+        //}
     }
 }

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using MVC_Exercises.Controllers;
 
 namespace MVC_Exercises.Controllers
 {
@@ -90,25 +91,7 @@ namespace MVC_Exercises.Controllers
 
         public IActionResult DisplayPeopleDetails()
         {
-            List<PeopleModel> listPeople = new List<PeopleModel>();
-            PeopleModel people = new PeopleModel();
-
-            people.Name = "Sverre Bumpa Jr";
-            people.Phone = 087565133;
-            people.City = "Stockholm";
-            listPeople.Add(people);
-
-            people = new PeopleModel();
-            people.Name = "Alf-Alfa Betasson";
-            people.Phone = 0760100200;
-            people.City = "Örebro";
-            listPeople.Add(people);
-
-            people = new PeopleModel();
-            people.Name = "Förste Walter";
-            people.Phone = 08212325;
-            people.City = "Reykjavik";
-            listPeople.Add(people);
+            var listPeople = PeopleModel.PeopleList();
 
             return View(listPeople);
         }
@@ -117,8 +100,9 @@ namespace MVC_Exercises.Controllers
         public IActionResult DisplayPeopleDetails(int _sortBase, PeopleModel _listPeople)
         {
             var listPeople = _listPeople;
+            var SortBase = _sortBase;
 
-            listPeople.Sort();
+            listPeople.;
 
             return View(listPeople);
         }
