@@ -22,7 +22,6 @@ namespace MVC_Exercises.Controllers
         private readonly string Key = "SessionRndNumber";
         private readonly string GuessList = "SessionGuessesList";
 
-
         public IActionResult Index()
         {          
             return View();
@@ -60,8 +59,7 @@ namespace MVC_Exercises.Controllers
         {
             GuessingGameModel.Win = false;
             GuessingGameModel.Guesses.Clear();
-            //var _rndNumber = GuessingGameModel.RndNumb();
-            //var _guesses = GuessingGameModel.Guesses;
+
             HttpContext.Session.SetInt32(Key, GuessingGameModel.RndNumb());
             GuessingGameModel.Guesses.Clear();
 
@@ -88,6 +86,41 @@ namespace MVC_Exercises.Controllers
             GuessingGameModel.ShowGuesses = HttpContext.Session.Get<List<int>>(GuessList);
 
             return View(guessingGame);
+        }
+
+        public IActionResult DisplayPeopleDetails()
+        {
+            List<PeopleModel> listPeople = new List<PeopleModel>();
+            PeopleModel people = new PeopleModel();
+
+            people.Name = "Sverre Bumpa Jr";
+            people.Phone = 087565133;
+            people.City = "Stockholm";
+            listPeople.Add(people);
+
+            people = new PeopleModel();
+            people.Name = "Alf-Alfa Betasson";
+            people.Phone = 0760100200;
+            people.City = "Örebro";
+            listPeople.Add(people);
+
+            people = new PeopleModel();
+            people.Name = "Förste Walter";
+            people.Phone = 08212325;
+            people.City = "Reykjavik";
+            listPeople.Add(people);
+
+            return View(listPeople);
+        }
+
+        [HttpPost]
+        public IActionResult DisplayPeopleDetails(int _sortBase, PeopleModel _listPeople)
+        {
+            var listPeople = _listPeople;
+
+            listPeople.Sort();
+
+            return View(listPeople);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
