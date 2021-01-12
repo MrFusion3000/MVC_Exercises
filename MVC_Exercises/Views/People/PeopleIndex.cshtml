@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MVC_Exercises.Models.PeopleModel>
+﻿@model PeopleViewModel
 
 @{
     ViewData["Title"] = "DisplayPeopleDetails";
@@ -7,8 +7,8 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<form action="People List" method="post">
-    <p><input type="text" name="_name" placeholder="Enter Name to search for" /></p>
+<form action="PeopleIndex" method="post">
+    <p><input type="text" name="searchSubject" placeholder="Enter Name to search for" /></p>
     <p><input type="text" name="_city" placeholder="Enter City to search for" /></p>
 
     <p><input type="submit" name="submit" value="Search" /></p>
@@ -32,7 +32,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.tempList)
         {
             <tr>
                 <td>

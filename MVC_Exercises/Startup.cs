@@ -73,7 +73,7 @@ namespace MVC_Exercises
                 endpoints.MapControllerRoute(
                     name: "DisplayPeopleDetails",
                     pattern: "/DisplayPeopleDetails",
-                    defaults: new { controller = "Home", action = "DisplayPeopleDetails" });
+                    defaults: new { controller = "People", action = "DisplayPeopleDetails" });
             });            
         }
     }

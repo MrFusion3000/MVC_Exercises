@@ -89,24 +89,6 @@ namespace MVC_Exercises.Controllers
             return View(guessingGame);
         }
 
-        public IActionResult DisplayPeopleDetails()
-        {
-            var listPeople = PeopleModel.PeopleList();
-
-            return View(listPeople);
-        }
-
-        [HttpPost]
-        public IActionResult DisplayPeopleDetails(int _sortBase, PeopleModel _listPeople)
-        {
-            var listPeople = _listPeople;
-            var SortBase = _sortBase;
-
-            listPeople.;
-
-            return View(listPeople);
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
