@@ -1,0 +1,16 @@
+﻿@model PeopleViewModel
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form action="Delete" method="post">
+    <p><input type="text" name="Name" value="@Model.Name" /></p>
+    <p><input type="tel" name="Phone" value="@Model.Phone" /></p>
+    <p><input type="text" name="City" value="@Model.City" /></p>
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <p><input type="submit" name="submit" value="Delete" /></p>
+</form>

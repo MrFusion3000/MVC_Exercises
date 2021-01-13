@@ -12,12 +12,34 @@ namespace MVC_Exercises.Controllers
 
         public IActionResult PeopleIndex()
         {
+            PeopleViewModel.tempSearchList.Clear();
+
             if (PeopleViewModel.listPeople.Count == 0)
             {
                 PeopleViewModel.CreatePeopleList();
             }
             PeopleViewModel model = new PeopleViewModel();
             model.tempList = PeopleViewModel.listPeople;
+
+            return View(model);
+        }
+
+        
+
+        [HttpPost]
+        public IActionResult PeopleIndex(string searchSubject, PeopleViewModel model)
+        {
+            if (searchSubject != null) 
+            { 
+                PeopleViewModel.SearchPeopleList(searchSubject);
+                model.tempList = PeopleViewModel.tempSearchList;
+            }
+            else
+            {
+                PeopleViewModel.Message = "";
+                PeopleViewModel.tempSearchList.Clear();
+                model.tempList = PeopleViewModel.listPeople;
+            }
 
             return View(model);
         }
@@ -37,21 +59,20 @@ namespace MVC_Exercises.Controllers
             return RedirectToAction("PeopleIndex");
         }
 
-        public IActionResult Delete(int Id)
+        public IActionResult Delete(int Id, PeopleViewModel model)
         {
-            var people = PeopleViewModel.listPeople.Find(x => x.Id == Id);
-            PeopleViewModel.listPeople.Remove(people);
+            if (Id != 0) 
+            {
+                var people = PeopleViewModel.listPeople.Find(x => x.Id == Id);
+                PeopleViewModel.listPeople.Remove(people);
+            }
+            else
+            {
 
-            return View("PeopleIndex");
+            }
+
+            return RedirectToAction("PeopleIndex");
         }
 
-        [HttpPostAttribute]
-        public IActionResult PeopleIndex (string searchSubject, PeopleViewModel tempList)
-        {
-            tempList = PeopleViewModel.listPeople.Find(x => x.Name == searchSubject);
-            
-
-            return View(tempList);
-        }
     }
 }

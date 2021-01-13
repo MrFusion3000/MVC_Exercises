@@ -71,9 +71,9 @@ namespace MVC_Exercises
                     pattern: "/GuessingGame",
                     defaults: new { controller = "Home", action = "GuessingGame" });
                 endpoints.MapControllerRoute(
-                    name: "DisplayPeopleDetails",
-                    pattern: "/DisplayPeopleDetails",
-                    defaults: new { controller = "People", action = "DisplayPeopleDetails" });
+                    name: "PeopleIndex",
+                    pattern: "/PeopleIndex",
+                    defaults: new { controller = "People", action = "PeopleIndex" });
             });            
         }
     }
