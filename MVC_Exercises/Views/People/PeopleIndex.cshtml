@@ -7,43 +7,60 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<form action="PeopleIndex" method="post">
-    <p>Enter Name or City to search for, or empty to see whole result.</p>
-    <p><input type="text" name="searchSubject" placeholder="Enter Name or City" /></p>
-    @*<p><input type="text" name="_city" placeholder="Enter City to search for" /></p>*@
-
-    <p><input type="submit" name="submit" value="Search" class="btn btn-dark" /></p>
-</form>
-
-@if (PeopleViewModel.Message != null)
-{
-    <h4>@PeopleViewModel.Message</h4>
-    <h4>@PeopleViewModel.Message2</h4>
-}
-
-<p>
-
-    @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-primary" })
-</p>
 <table class="table">
     <thead>
         <tr>
             <th>
+                Enter Name or City to search for, or empty to see whole result.
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <form action="PeopleIndex" method="post">
+                    <input type="text" name="searchSubject" placeholder="Enter Name or City" />
+                    <input type="submit" name="submit" value="Search" class="btn btn-dark" />
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @if (PeopleViewModel.Message != null)
+                {
+                    <h5>@PeopleViewModel.Message</h5>
+                    <h5>@PeopleViewModel.Message2</h5>
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>
+                    @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-primary" })
+            </td>
+        </tr>
+    </thead>
+</table>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.ActionLink("Sort", "SortAlpha", null, new { _sortCriteria = "Name" })<br />
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Phone)
             </th>
             <th>
+                @Html.ActionLink("Sort", "SortAlpha", null, new { _sortCriteria = "City" })<br />
                 @Html.DisplayNameFor(model => model.City)
             </th>
             <th></th>
         </tr>
     </thead>
-    @if (PeopleViewModel.tempSearchList.Count == 0)
+    @if (PeopleViewModel.TempSearchList.Count == 0)
     {
         <tbody>
-            @foreach (var item in Model.tempList)
+            @foreach (var item in Model.TempList)
             {
                 <tr>
                     <td>
@@ -61,10 +78,10 @@
             }
         </tbody>
     }
-    @if (PeopleViewModel.tempSearchList.Count != 0)
+    @if (PeopleViewModel.TempSearchList.Count != 0)
     {
         <tbody>
-            @foreach (var item in PeopleViewModel.tempSearchList)
+            @foreach (var item in PeopleViewModel.TempSearchList)
             {
                 <tr>
                     <td>
@@ -76,6 +93,8 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.City)
                     </td>
+                    <td>@Html.ActionLink("Delete", "Delete", new { Id = item.Id })</td>
+
                 </tr>
             }
         </tbody>

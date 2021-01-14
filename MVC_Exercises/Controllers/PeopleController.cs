@@ -12,19 +12,19 @@ namespace MVC_Exercises.Controllers
 
         public IActionResult PeopleIndex()
         {
-            PeopleViewModel.tempSearchList.Clear();
+            PeopleViewModel.TempSearchList.Clear();
 
-            if (PeopleViewModel.listPeople.Count == 0)
+            if (PeopleViewModel.ListPeople.Count == 0)
             {
                 PeopleViewModel.CreatePeopleList();
             }
-            PeopleViewModel model = new PeopleViewModel();
-            model.tempList = PeopleViewModel.listPeople;
+            PeopleViewModel model = new PeopleViewModel
+            {
+                TempList = PeopleViewModel.ListPeople
+            };
 
             return View(model);
-        }
-
-        
+        }        
 
         [HttpPost]
         public IActionResult PeopleIndex(string searchSubject, PeopleViewModel model)
@@ -32,13 +32,15 @@ namespace MVC_Exercises.Controllers
             if (searchSubject != null) 
             { 
                 PeopleViewModel.SearchPeopleList(searchSubject);
-                model.tempList = PeopleViewModel.tempSearchList;
+                model.TempList = PeopleViewModel.TempSearchList;
             }
             else
             {
                 PeopleViewModel.Message = "";
-                PeopleViewModel.tempSearchList.Clear();
-                model.tempList = PeopleViewModel.listPeople;
+                PeopleViewModel.Message2 = "";
+
+                PeopleViewModel.TempSearchList.Clear();
+                model.TempList = PeopleViewModel.ListPeople;
             }
 
             return View(model);
@@ -53,26 +55,46 @@ namespace MVC_Exercises.Controllers
         public IActionResult Create(PeopleViewModel model)
         {
             model.Id = PeopleViewModel.NewId;
-            PeopleViewModel.listPeople.Add(model);
+            PeopleViewModel.ListPeople.Add(model);
             PeopleViewModel.NewId++;
 
             return RedirectToAction("PeopleIndex");
         }
 
-        public IActionResult Delete(int Id, PeopleViewModel model)
+        public IActionResult Delete(int Id)
         {
             if (Id != 0) 
             {
-                var people = PeopleViewModel.listPeople.Find(x => x.Id == Id);
-                PeopleViewModel.listPeople.Remove(people);
+                var people = PeopleViewModel.ListPeople.Find(x => x.Id == Id);
+                PeopleViewModel.ListPeople.Remove(people);
             }
             else
             {
-
+                PeopleViewModel.Message = "Something went wrong. No Id found.";
             }
 
             return RedirectToAction("PeopleIndex");
         }
 
+        public IActionResult SortAlpha(/*PeopleViewModel model,*/ string _sortCriteria)
+        {
+            if (_sortCriteria == "Name")
+            {
+                PeopleViewModel.OrderOrderName = !PeopleViewModel.OrderOrderName;
+                PeopleViewModel.SortListName();
+
+                //model.TempList = PeopleViewModel.TempSearchList;
+            }
+
+            if (_sortCriteria == "City")
+            {
+                PeopleViewModel.OrderOrderCity = !PeopleViewModel.OrderOrderCity;
+                PeopleViewModel.SortListCity();
+
+               // model.TempList = PeopleViewModel.TempSearchList;
+            }
+
+            return View("PeopleIndex");
+        }
     }
 }
