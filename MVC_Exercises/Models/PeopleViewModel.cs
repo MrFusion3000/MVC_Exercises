@@ -118,7 +118,7 @@ namespace MVC_Exercises.Models
             foreach (var item in sortOrder)
             {
                 TempSearchList.Add(new PeopleViewModel { Id = item.Id, Name = item.Name, Phone = item.Phone, City = item.City });
-            }
+            }  
         }
     }
 

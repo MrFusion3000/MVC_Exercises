@@ -1,0 +1,15 @@
+﻿@model PeopleViewModel
+
+
+            <td>
+                @Html.DisplayFor(modelItem => Model.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.City)
+            </td>
+            <td>@Html.ActionLink("Delete", "Delete", new { Id = Model.Id })</td>
+
+        

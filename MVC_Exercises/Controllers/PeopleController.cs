@@ -76,14 +76,16 @@ namespace MVC_Exercises.Controllers
             return RedirectToAction("PeopleIndex");
         }
 
-        public IActionResult SortAlpha(/*PeopleViewModel model,*/ string _sortCriteria)
+        public IActionResult SortAlpha(PeopleViewModel model, string _sortCriteria, string _landingPage)
         {
+            string LandingPage = _landingPage;
             if (_sortCriteria == "Name")
             {
                 PeopleViewModel.OrderOrderName = !PeopleViewModel.OrderOrderName;
                 PeopleViewModel.SortListName();
 
-                //model.TempList = PeopleViewModel.TempSearchList;
+                //Copy Sort result to TempList to show on page
+                model.TempList = PeopleViewModel.TempSearchList;
             }
 
             if (_sortCriteria == "City")
@@ -91,10 +93,26 @@ namespace MVC_Exercises.Controllers
                 PeopleViewModel.OrderOrderCity = !PeopleViewModel.OrderOrderCity;
                 PeopleViewModel.SortListCity();
 
-               // model.TempList = PeopleViewModel.TempSearchList;
+               model.TempList = PeopleViewModel.TempSearchList;
             }
 
-            return View("PeopleIndex");
+            return View(LandingPage, model);
+        }
+
+        public IActionResult PeoplePartial()
+        {
+            PeopleViewModel.TempSearchList.Clear();
+
+            if (PeopleViewModel.ListPeople.Count == 0)
+            {
+                PeopleViewModel.CreatePeopleList();
+            }
+            PeopleViewModel model = new PeopleViewModel
+            {
+                TempList = PeopleViewModel.ListPeople
+            };
+
+            return View(model);
         }
     }
 }
