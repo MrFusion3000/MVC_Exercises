@@ -7,6 +7,37 @@ a.navbar-brand {
   word-break: break-all;
 }
 
+.right {
+    float: right;
+}
+
+.bg-color{
+    background-color: bisque;
+}
+
+.bg-colorMenu1 {
+    background-color: coral;
+}
+.bg-colorMenu2 {
+    background-color: aqua;
+}
+.bg-colorMenu3 {
+    background-color: aquamarine;
+}
+.bg-colorMenu4 {
+    background-color:azure;
+}
+.bg-colorMenu5 {
+    background-color:chocolate;
+}
+.bg-colorMenu6 {
+    background-color:cornflowerblue;
+}
+.bg-colorMenu7 {
+    background-color:darkcyan;
+}
+
+
 /* Provide sufficient contrast against white background */
 a {
   color: #0366d6;

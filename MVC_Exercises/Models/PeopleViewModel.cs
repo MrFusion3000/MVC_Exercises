@@ -49,6 +49,7 @@ namespace MVC_Exercises.Models
     
         public static void SearchPeopleList(string _searchSubject)
         {
+            TempSearchList.Clear();
             IEnumerable<PeopleViewModel> tempSearch = from p in PeopleViewModel.ListPeople
                                                       where p.Name == _searchSubject
                                                       select p;

@@ -10,7 +10,7 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
+            <th colspan="2">
                 Enter Name or City to search for, or empty to see whole result.
             </th>
         </tr>
@@ -21,9 +21,12 @@
                     <input type="submit" name="submit" value="Search" class="btn btn-dark" />
                 </form>
             </td>
+            <td>
+                @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-primary" })
+            </td>
         </tr>
         <tr>
-            <td>
+            <td colspan="2">
                 @if (PeopleViewModel.Message != null)
                 {
                     <h5>@PeopleViewModel.Message</h5>
@@ -31,11 +34,7 @@
                 }
             </td>
         </tr>
-        <tr>
-            <td>
-                @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-primary" })
-            </td>
-        </tr>
+        
     </thead>
 </table>
 

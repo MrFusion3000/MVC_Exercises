@@ -9,7 +9,6 @@ namespace MVC_Exercises.Controllers
 {
     public class PeopleController : Controller
     {
-
         public IActionResult PeopleIndex()
         {
             PeopleViewModel.TempSearchList.Clear();
@@ -27,7 +26,7 @@ namespace MVC_Exercises.Controllers
         }        
 
         [HttpPost]
-        public IActionResult PeopleIndex(string searchSubject, PeopleViewModel model)
+        public IActionResult SearchPeopleIndex(string searchSubject, PeopleViewModel model)
         {
             if (searchSubject != null) 
             { 
@@ -43,7 +42,7 @@ namespace MVC_Exercises.Controllers
                 model.TempList = PeopleViewModel.ListPeople;
             }
 
-            return View(model);
+            return View("PeopleIndex", model);
         }
 
         public IActionResult Create()

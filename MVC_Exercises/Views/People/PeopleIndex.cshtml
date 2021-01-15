@@ -10,20 +10,23 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
+            <th colspan="2">
                 Enter Name or City to search for, or empty to see whole result.
             </th>
         </tr>
         <tr>
             <td>
-                <form action="PeopleIndex" method="post">
+                <form action="SearchPeopleIndex" method="post">
                     <input type="text" name="searchSubject" placeholder="Enter Name or City" />
                     <input type="submit" name="submit" value="Search" class="btn btn-dark" />
                 </form>
             </td>
+            <td @*class="right"*@>
+                @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-primary" })
+            </td>
         </tr>
         <tr>
-            <td>
+            <td colspan="2">
                 @if (PeopleViewModel.Message != null)
                 {
                     <h5>@PeopleViewModel.Message</h5>
@@ -31,11 +34,11 @@
                 }
             </td>
         </tr>
-        <tr>
-            <td>
+        @*<tr>
+            <td class="right">
                     @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-primary" })
             </td>
-        </tr>
+        </tr>*@
     </thead>
 </table>
 
@@ -57,8 +60,8 @@
             <th></th>
         </tr>
     </thead>
-    @*@if (PeopleViewModel.TempSearchList.Count == 0)
-    {*@
+    @if (PeopleViewModel.TempSearchList.Count == 0)
+    {
         <tbody>
             @foreach (var item in Model.TempList)
             {
@@ -77,9 +80,9 @@
                 </tr>
             }
         </tbody>
-    @*}*@
+    }
 
-    @*@if (PeopleViewModel.TempSearchList.Count != 0)
+    @if (PeopleViewModel.TempSearchList.Count != 0)
     {
         <tbody>
             @foreach (var item in PeopleViewModel.TempSearchList)
@@ -99,6 +102,6 @@
                 </tr>
             }
         </tbody>
-    }*@
+    }
 
 </table>
